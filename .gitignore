@@ -1,0 +1,8 @@
+.Module.*
+.gs_usb_fd.*
+Module.symvers
+gs_usb_fd.ko
+gs_usb_fd.mod
+gs_usb_fd.mod.c
+*.o
+modules.order
