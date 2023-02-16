@@ -1,6 +1,6 @@
 # gs_usb_fd
 
-A modified gs_usb driver which supports CAN-FD.
+A backport of the gs_usb driver from kernel v6 which supports CAN-FD, should compile on kernel 5.15 (tested Ubuntu 22.04). Renamed the name of the module, so it does not conflict with the standard distribution.
 
 ## Supported Devices
 
