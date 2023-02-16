@@ -26,8 +26,8 @@ sudo apt install kernel-headers-$(uname -r)
 2. Use `make` to build the driver
 
 3. Installation part 1 (has to be done once)
-Add the following to the end of /etc/modprobe.d/blacklist.conf
-This would disable the old gs_usb module from loading.
+
+Add the following to the end of /etc/modprobe.d/blacklist.conf. This would disable the old gs_usb module from loading.
 ```
 # Doing work on gs_usb, blacklist the system one.
 blacklist gs_usb
