@@ -4,7 +4,8 @@ A modified gs_usb driver which supports CAN-FD.
 
 ## Supported Devices
 
-- [CANtact Pro](https://cantact.io)
+- Tested modified MKS UTC board with upgraded transciever chip (MCP2562FD).
+- Tested custom STM32G0B1 boards with candlelight FW (https://github.com/ghent360/candleLight_fw/tree/test_g0)
 
 ## Building
 
@@ -24,11 +25,25 @@ sudo apt install kernel-headers-$(uname -r)
 
 2. Use `make` to build the driver
 
-3. Load the driver:
-
+3. Installation part 1 (has to be done once)
+Add the following to the end of /etc/modprobe.d/blacklist.conf
+This would disable the old gs_usb module from loading.
 ```
-sudo modprobe can-dev
-sudo insmod gs_usb_fd.ko
+# Doing work on gs_usb, blacklist the system one.
+blacklist gs_usb
+```
+4. Installation part 2 (has to be every time the kernel is updated)
+
+Rebuild the module:
+```
+make clean
+make
+```
+
+Copy the module in the kernel module directory and refresh the module dependencies
+```
+sudo cp gs_usb_fd.ko /lib/modules/`uname -r`/kernel/drivers/net/can/usb/
+sudo depmod
 ```
 
 ## Credits
