@@ -47,6 +47,25 @@ sudo make install
 sudo depmod
 ```
 
+## DKMS integration
+ * Install the dkms package for your distro
+ * From within the git repository folder run
+```
+git archive --prefix=gs_usb_fd-1.0/ -o /tmp/gs_usb_fd-1.0.tar HEAD
+```
+ * switch to root shell (sudo -s)
+ * change to the /usr/src folder and unpack the source archive
+```
+cd /usr/src
+tar xvf /tmp/gs_usb_fd-1.0.tar
+```
+ * Run the following commands to add the module to the DKMS system:
+```
+dkms add -m gs_usb_fd -v 1.0 --verbose
+dkms build -m gs_usb_fd -v 1.0 --verbose
+dkms install -m gs_usb_fd -v 1.0 --verbose
+```
+
 ## Credits
 
 Thanks to Maximilian Schneider for authoring the original gs_usb driver.
