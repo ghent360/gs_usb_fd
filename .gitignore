@@ -6,3 +6,4 @@ gs_usb_fd.mod
 gs_usb_fd.mod.c
 *.o
 modules.order
+.modules.order.cmd
