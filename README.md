@@ -23,6 +23,11 @@ Ubuntu:
 sudo apt install kernel-headers-$(uname -r)
 ```
 
+Raspbery Pi (raspbian):
+```
+sudo apt install raspberrypi-kernel-headers
+```
+
 2. Use `make` to build the driver
 
 3. Installation part 1 (has to be done once)
@@ -38,11 +43,7 @@ Rebuild the module:
 ```
 make clean
 make
-```
-
-Copy the module in the kernel module directory and refresh the module dependencies
-```
-sudo cp gs_usb_fd.ko /lib/modules/`uname -r`/kernel/drivers/net/can/usb/
+sudo make install
 sudo depmod
 ```
 
