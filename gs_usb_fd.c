@@ -19,6 +19,7 @@
 #include <linux/timecounter.h>
 #include <linux/units.h>
 #include <linux/usb.h>
+#include <linux/version.h>
 #include <linux/workqueue.h>
 
 #include <linux/can.h>
@@ -1031,14 +1032,14 @@ static int gs_can_close(struct net_device *netdev)
 
 static int gs_can_eth_ioctl(struct net_device *netdev, struct ifreq *ifr, int cmd)
 {
-#if 0
+#if LINUX_VERSION_CODE > KERNEL_VERSION(6,1,0)
 	const struct gs_can *dev = netdev_priv(netdev);
 
 	if (dev->feature & GS_CAN_FEATURE_HW_TIMESTAMP)
 		return can_eth_ioctl_hwts(netdev, ifr, cmd);
-#endif
-
+#else
 	return -EOPNOTSUPP;
+#endif
 }
 
 static const struct net_device_ops gs_usb_netdev_ops = {
@@ -1092,14 +1093,15 @@ static int gs_usb_set_phys_id(struct net_device *netdev,
 static int gs_usb_get_ts_info(struct net_device *netdev,
 			      struct ethtool_ts_info *info)
 {
-#if 0
+#if LINUX_VERSION_CODE > KERNEL_VERSION(6,1,0)
 	struct gs_can *dev = netdev_priv(netdev);
 
 	/* report if device supports HW timestamps */
 	if (dev->feature & GS_CAN_FEATURE_HW_TIMESTAMP)
 		return can_ethtool_op_get_ts_info_hwts(netdev, info);
-#endif
+#else
 	return ethtool_op_get_ts_info(netdev, info);
+#endif
 }
 
 static const struct ethtool_ops gs_usb_ethtool_ops = {
